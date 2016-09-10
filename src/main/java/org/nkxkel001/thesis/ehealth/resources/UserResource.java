@@ -2,6 +2,7 @@ package org.nkxkel001.thesis.ehealth.resources;
 
 import java.util.List;
 
+import javax.annotation.security.RolesAllowed;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
@@ -18,21 +19,23 @@ import org.nkxkel001.thesis.ehealth.services.UserService;
 
 @Path("/users")
 
+
 public class UserResource {
 	
 	UserService userService = new UserService();
 	
 	// GET permission: only admin can retrieve list of all users
-	
+	@RolesAllowed("ADMIN")
 	@GET
 	@Produces (MediaType.APPLICATION_JSON)
+	@Consumes(MediaType.APPLICATION_JSON)
 	//only admin
 	public List<User> getUsers(){
 		//String name = "blabla";
 		List<User> listusers =  userService.getAllUsers();
 		
 		return listusers;
-						
+		
 	}
 	
 	
@@ -53,7 +56,7 @@ public class UserResource {
 	public User getprofile(@PathParam("username")String username){
 		
 		return userService.GetUser(username);
-		
+		//return "hello its def json";
 		
 	}
 	
