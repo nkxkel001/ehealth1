@@ -44,7 +44,7 @@ public class DataService {
 		healthcheck = new HealthCheck (newData);
 		String status = healthcheck.CheckStatus();
 		newData.setHealthStatus(status);
-		newData.setValues();
+		//newData.setValues();
 		String s = sendAlert(newData);
 		//save data
 		@SuppressWarnings("unused")

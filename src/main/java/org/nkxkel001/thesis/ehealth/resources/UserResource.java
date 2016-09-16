@@ -2,6 +2,7 @@ package org.nkxkel001.thesis.ehealth.resources;
 
 import java.util.List;
 
+import javax.annotation.security.PermitAll;
 import javax.annotation.security.RolesAllowed;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
@@ -25,7 +26,8 @@ public class UserResource {
 	UserService userService = new UserService();
 	
 	// GET permission: only admin can retrieve list of all users
-	@RolesAllowed("ADMIN")
+	//@RolesAllowed("ADMIN")
+	//@PermitAll
 	@GET
 	@Produces (MediaType.APPLICATION_JSON)
 	@Consumes(MediaType.APPLICATION_JSON)

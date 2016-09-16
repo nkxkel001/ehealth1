@@ -16,6 +16,7 @@ public class User {
 	private String dateRegistered;
 	private int doctorID;
 	private String emergencyContact;
+	private String doctorUsr;
 	
 	
 	
@@ -34,6 +35,19 @@ public class User {
 
 
 	public User(int id, String firstName, String userName, String lastName,
+			String dateRegistered, int doctorID, String emergencyContact,String doctorUsr) {
+		
+		this.id = id;
+		this.firstName = firstName;
+		this.userName = userName;
+		this.lastName = lastName;
+		this.dateRegistered = dateRegistered;
+		this.doctorID = doctorID;
+		this.emergencyContact = emergencyContact;
+		this.doctorUsr = doctorUsr;
+		
+	}
+	public User(int id, String firstName, String userName, String lastName,
 			String dateRegistered, int doctorID, String emergencyContact) {
 		
 		this.id = id;
@@ -43,8 +57,20 @@ public class User {
 		this.dateRegistered = dateRegistered;
 		this.doctorID = doctorID;
 		this.emergencyContact = emergencyContact;
+		
+		
 	}
 
+
+
+	public String getDoctorUsr() {
+		return doctorUsr;
+	}
+
+
+	public void setDoctorUsr(String doctorUsr) {
+		this.doctorUsr = doctorUsr;
+	}
 
 
 	public int getId() {

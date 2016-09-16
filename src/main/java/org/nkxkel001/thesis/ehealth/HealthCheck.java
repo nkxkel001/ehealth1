@@ -33,7 +33,7 @@ public class HealthCheck {
 		
 		if (deviceName.equalsIgnoreCase("hxx")){
 			
-			status = HeartRateCheck(data.getValues());	
+			status = HeartRateCheck(data.getArray());	
 			checked = true;
 		}
 		

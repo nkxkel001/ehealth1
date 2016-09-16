@@ -35,8 +35,11 @@ public class Alert {
 		//get user emergency contact to send email to
 		List <String> contacts = new ArrayList <String>(); 
 		String contact = user.getEmergencyContact();
+		String[] conts = contact.split(",");
+		for(int i = 0; i<conts.length; i++){
+			contacts.add(conts[i]);
+		}
 		String contact2 = "ostelekk@gmail.com";
-		contacts.add(contact);
 		contacts.add(contact2);
 		return contacts;
 	}
@@ -61,7 +64,7 @@ public class Alert {
 	     PrintWriter outfile;
 		try {
 			outfile = new PrintWriter(dataCSV);
-			String val = this.data.getStringValues();
+			String val = this.data.getValues();
 			String dataArray = val.substring(1, val.length()-1);
 			outfile.println("Date Monitored: "+data.getDateMonitored());
 			outfile.println("Patient name: "+user.toString());
