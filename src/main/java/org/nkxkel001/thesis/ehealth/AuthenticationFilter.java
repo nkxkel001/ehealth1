@@ -24,18 +24,18 @@ import org.glassfish.jersey.internal.util.Base64;
  * based on username and passowrd provided in request
  * */
 //@Provider
-public class AuthenticationFilter //implements javax.ws.rs.container.ContainerRequestFilter
+public class AuthenticationFilter implements javax.ws.rs.container.ContainerRequestFilter
 {
      
-   /* @Context
+    @Context
     private ResourceInfo resourceInfo;
      
     private static final String AUTHORIZATION_PROPERTY = "Authorization";
     private static final String AUTHENTICATION_SCHEME = "Basic";
-    private static final Response ACCESS_DENIED = Response.status(Response.Status.UNAUTHORIZED)
-                                                        .entity("You cannot access this resource").build();
-    private static final Response ACCESS_FORBIDDEN = Response.status(Response.Status.FORBIDDEN)
-                                                        .entity("Access blocked for all users !!").build();
+    //private static final Response ACCESS_DENIED = Response.status(Response.Status.UNAUTHORIZED)
+                                                       // .entity("You cannot access this resource").build();
+    //private static final Response ACCESS_FORBIDDEN = Response.status(Response.Status.FORBIDDEN)
+                                                       // .entity("Access blocked for all users !!").build();
       
     @Override
     public void filter(ContainerRequestContext requestContext)
@@ -47,7 +47,8 @@ public class AuthenticationFilter //implements javax.ws.rs.container.ContainerRe
             //Access denied for all
             if(method.isAnnotationPresent(DenyAll.class))
             {
-                requestContext.abortWith(ACCESS_FORBIDDEN);
+                //requestContext.abortWith(ACCESS_FORBIDDEN);
+                requestContext.abortWith( Response.status(Response.Status.UNAUTHORIZED).entity("Access blocked for all users !!").build() );
                 return;
             }
               
@@ -60,7 +61,9 @@ public class AuthenticationFilter //implements javax.ws.rs.container.ContainerRe
             //If no authorization information present; block access
             if(authorization == null || authorization.isEmpty())
             {
-                requestContext.abortWith(ACCESS_DENIED);
+                //requestContext.abortWith(ACCESS_DENIED);
+                requestContext.abortWith( Response.status(Response.Status.UNAUTHORIZED).entity("You cannot access this resource").build() ); 
+                 
                 return;
             }
               
@@ -88,7 +91,7 @@ public class AuthenticationFilter //implements javax.ws.rs.container.ContainerRe
                 //Is user valid?
                 if( ! isUserAllowed(username, password, rolesSet))
                 {
-                    requestContext.abortWith(ACCESS_DENIED);
+                	requestContext.abortWith( Response.status(Response.Status.UNAUTHORIZED).entity("You cannot access this resource").build() ); 
                     return;
                 }
             }
@@ -114,5 +117,5 @@ public class AuthenticationFilter //implements javax.ws.rs.container.ContainerRe
             }
         }
         return isAllowed;
-    }*/
+    }
 }

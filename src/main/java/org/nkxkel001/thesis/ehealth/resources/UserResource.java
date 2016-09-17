@@ -7,6 +7,7 @@ import javax.annotation.security.RolesAllowed;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
+import javax.ws.rs.HeaderParam;
 import javax.ws.rs.POST;
 import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
@@ -26,7 +27,7 @@ public class UserResource {
 	UserService userService = new UserService();
 	
 	// GET permission: only admin can retrieve list of all users
-	//@RolesAllowed("ADMIN")
+	@RolesAllowed("ADMIN")
 	//@PermitAll
 	@GET
 	@Produces (MediaType.APPLICATION_JSON)
@@ -44,14 +45,15 @@ public class UserResource {
 	//public access ? called with details of new user for sign up from app
 	//called from google after authentication
 	//return user id to be used in url to post data while logged in
+	@PermitAll
 	@POST
 	@Consumes (MediaType.APPLICATION_JSON)
 	@Produces(MediaType.TEXT_PLAIN)
-	public String addUser(User newUser){
-				
-		return userService.addUser(newUser);
+	public String addUser(User newUser,@HeaderParam("authorization") String authString){
+		//get password and username
+		return userService.addUser(newUser,authString);
 	}
-	
+	@RolesAllowed({"USER","ADMIN"})
 	@GET
 	@Path("/{username}")
 	@Produces (MediaType.APPLICATION_JSON)
@@ -61,7 +63,7 @@ public class UserResource {
 		//return "hello its def json";
 		
 	}
-	
+	@RolesAllowed("USER")
 	@PUT
 	@Path("/{username}")
 	@Consumes(MediaType.APPLICATION_JSON)
@@ -71,7 +73,7 @@ public class UserResource {
 		return userService.UpdateUser(user);
 			
 	}
-	
+	@RolesAllowed({"USER","ADMIN"})
 	@DELETE
 	@Path("/{username}")
 	public String DeleteUser(@PathParam("username")String username){

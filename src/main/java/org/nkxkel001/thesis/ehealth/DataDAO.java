@@ -128,6 +128,15 @@ public class DataDAO {
 		return alldata;
 	}
 	
+	public void DeleteData(int id){
+		
+		String sql = "DELETE FROM DataTable WHERE DataID = "+id;
+	    databaseQuery.UpdateOrDelete(sql);
+			
+	}
+	
+	
+	
 	
 	
 	

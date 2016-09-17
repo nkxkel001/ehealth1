@@ -2,6 +2,8 @@ package org.nkxkel001.thesis.ehealth.resources;
 
 import java.util.List;
 
+import javax.annotation.security.DenyAll;
+import javax.annotation.security.RolesAllowed;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
@@ -24,6 +26,7 @@ public class DataResource {
 	 * @param args
 	 */
 	//testing purpose...deny all in proper implementation
+	@DenyAll
 	@GET
 	@Produces (MediaType.APPLICATION_JSON)
 	public List<Data> getAllUserData(){
@@ -34,7 +37,7 @@ public class DataResource {
 		return allData;
 						
 	}
-	
+	@RolesAllowed({"USER","DOCTOR"})
 	@GET
 	@Path("/{username}")
 	@Produces (MediaType.APPLICATION_JSON)
@@ -43,6 +46,7 @@ public class DataResource {
 		return  userData;
 	}
 	
+	@RolesAllowed({"USER"})
 	@POST
 	//@Path("/{username}")
 	@Consumes (MediaType.APPLICATION_JSON)
@@ -53,6 +57,8 @@ public class DataResource {
 				
 		return dataService.addData(newData);
 	}
+	
+	
 	
 	
 	

@@ -205,6 +205,51 @@ public class DatabaseQuery {
 		 
 	  }
 	 
+	 public String SelectString(String sql, String columnLabel ){
+		 String result="";
+		 Statement stmt = null;
+		  try{
+		      System.out.println("Creating statement for SelectString...");
+		      stmt = connect.createStatement();
+		      ResultSet rs = stmt.executeQuery(sql);
+		      //STEP 5: Extract data from result set
+		      while(rs.next()){
+		         //Retrieve by column name
+		    	  result = rs.getString(columnLabel);
+		        		        		         
+		      }
+		       
+		      //STEP 6: Clean-up environment
+		      rs.close();
+		     // stmt.close();
+		     // connect.close();
+		      //return proflist;
+		   }catch(SQLException se){
+		      //Handle errors for JDBC
+		      se.printStackTrace();
+		   }catch(Exception e){
+		      //Handle errors for Class.forName
+		      e.printStackTrace();
+		   }finally{
+		      //finally block used to close resources
+		      try{
+		         if(stmt!=null)
+		            stmt.close();
+		      }catch(SQLException se2){
+		      }// nothing we can do
+		      /*try{
+		         if(connect!=null)
+		            connect.close();
+		      }catch(SQLException se){
+		         se.printStackTrace();
+		      }*///end finally try
+		   }//end try
+		   System.out.println("Goodbye!");
+					 
+		 return result;
+		 
+	  }
+	 
 	 public int Insert (String sql) {
 		   
 		   Statement stmt = null;
