@@ -50,6 +50,14 @@ public String getRole(String username){
 		return res;
 		
 	}
+public boolean matchCredentials(String username, String password){
+	boolean match = false;
+	if(getPassword(username).equals(password)){
+		match = true;
+	}
+	return match;
+
+ }
 	
 	
 

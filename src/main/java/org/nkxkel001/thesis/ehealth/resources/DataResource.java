@@ -5,6 +5,7 @@ import java.util.List;
 import javax.annotation.security.DenyAll;
 import javax.annotation.security.RolesAllowed;
 import javax.ws.rs.Consumes;
+import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
@@ -57,6 +58,16 @@ public class DataResource {
 				
 		return dataService.addData(newData);
 	}
+	
+	@RolesAllowed({"USER"})
+	@DELETE
+	@Path("/{username}/{id}")
+	@Produces(MediaType.TEXT_PLAIN)
+	public String deleteData(@PathParam("username")String username,@PathParam("id")int id){
+				
+		return dataService.DeleteUser(id);
+	}
+	
 	
 	
 	

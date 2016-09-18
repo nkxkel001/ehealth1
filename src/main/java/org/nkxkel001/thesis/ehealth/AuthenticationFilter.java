@@ -108,7 +108,7 @@ public class AuthenticationFilter implements javax.ws.rs.container.ContainerRequ
          
         if(username.equals("howtodoinjava") && password.equals("password"))
         {
-            String userRole = "ADMIN";
+            String userRole = "USER";
              
             //Step 2. Verify user role
             if(rolesSet.contains(userRole))

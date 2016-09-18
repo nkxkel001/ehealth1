@@ -135,10 +135,25 @@ public class DataDAO {
 			
 	}
 	
+public Data GetData(int id){
+		
+		String sql = "SELECT * FROM DataTable WHERE DataID = "+id;
+		ArrayList<HashMap <String, String>> results = databaseQuery.SelectAll(sql);
+		Data retrievedData = null;
+		if (results.size()!=0){
+			
+			retrievedData = CreateData(results.get(0));
+		}
+		
+		return retrievedData;
+			
+	}
+	}
+	
 	
 	
 	
 	
 	
 
-}
+

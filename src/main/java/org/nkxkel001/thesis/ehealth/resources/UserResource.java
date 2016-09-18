@@ -53,6 +53,17 @@ public class UserResource {
 		//get password and username
 		return userService.addUser(newUser,authString);
 	}
+	
+	@PermitAll
+	@GET
+	@Path("/login")
+	@Produces(MediaType.TEXT_PLAIN)
+	public String loginUser(@HeaderParam("authorization") String authString){
+		//get password and username
+		return userService.checkUser(authString);
+	}
+	
+	
 	@RolesAllowed({"USER","ADMIN"})
 	@GET
 	@Path("/{username}")

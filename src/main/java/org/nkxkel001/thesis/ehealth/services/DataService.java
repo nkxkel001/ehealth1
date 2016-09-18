@@ -64,5 +64,29 @@ public class DataService {
 				
 		return res;
 	}
+	
+	public String DeleteUser(int id){
+		String success="";
+		datadao.DeleteData(id);
+		//confirm deletion
+		if(dataExists(id)){
+			success = "Failed to delete data";
+		}
+		else{
+			success = "Successfully deleted ";
+		}
+		return success;
+	}
+	
+
+	private boolean dataExists(int id) {
+		if (datadao.GetData(id)!= null){
+					
+					return true;
+				}
+				
+				else
+					return false;
+			}
 
 }
